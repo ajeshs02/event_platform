@@ -15,6 +15,8 @@ export async function POST(req: Request) {
     )
   }
 
+  console.log('webhook reached')
+
   // Get the headers
   const headerPayload = headers()
   const svix_id = headerPayload.get('svix-id')
@@ -55,8 +57,8 @@ export async function POST(req: Request) {
   const { id } = evt.data
   const eventType = evt.type
 
-  //CREATE USER
   if (eventType === 'user.created') {
+    console.log('user created')
     const { id, email_addresses, image_url, first_name, last_name, username } =
       evt.data
 
@@ -82,8 +84,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: 'OK', user: newUser })
   }
 
-  //UPDATE USER
-
   if (eventType === 'user.updated') {
     const { id, image_url, first_name, last_name, username } = evt.data
 
@@ -99,7 +99,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: 'OK', user: updatedUser })
   }
 
-  //DELETE
   if (eventType === 'user.deleted') {
     const { id } = evt.data
 

@@ -15,8 +15,6 @@ export async function POST(req: Request) {
     )
   }
 
-  console.log('webhook reached')
-
   // Get the headers
   const headerPayload = headers()
   const svix_id = headerPayload.get('svix-id')

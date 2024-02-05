@@ -18,7 +18,7 @@ import User from '../database/models/user.model'
 export const checkoutOrder = async (order: CheckoutOrderParams) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
-  const price = order.isFree ? 0 : Number(order.price)
+  const price = order.isFree ? 0 : Number(order.price) * 100
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -37,9 +37,6 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
       metadata: {
         eventId: order.eventId,
         buyerId: order.buyerId,
-      },
-      shipping_address_collection: {
-        allowed_countries: ['IN'],
       },
 
       mode: 'payment',

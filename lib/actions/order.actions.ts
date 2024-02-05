@@ -38,6 +38,12 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
         eventId: order.eventId,
         buyerId: order.buyerId,
       },
+      shipping_address_collection: {
+        allowed_countries: ['IN'],
+      },
+      billing_address_collection: {
+        allowed_countries: ['IN'],
+      },
       mode: 'payment',
       success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/profile`,
       cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
